@@ -1,4 +1,4 @@
-# Venture Forge — Three Redesign Directions
+# Venture Forge — Six Redesign Directions
 
 Static HTML/CSS/JS prototypes of [ventureforgeaustin.org](https://www.ventureforgeaustin.org/). Six directions. Every version includes all six pages: Home, 2026 Event, Speakers, Vision, Partner, and FAQ.
 
@@ -36,7 +36,7 @@ assets/
 v1-refresh/ … v6-notion/   ← each has css/style.css, js/main.js, 6 pages
 ```
 
-Edit copy for speakers, the schedule, FAQ, and sponsorship tiers once in `assets/js/data.js`. All three versions read from it.
+Edit copy for speakers, the schedule, FAQ, and sponsorship tiers once in `assets/js/data.js`. All six versions read from it.
 
 ## Before launch
 
