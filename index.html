@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Venture Forge — Three Directions</title>
+  <meta name="description" content="Three redesign directions for ventureforgeaustin.org.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter+Tight:wght@400;500;800&family=DM+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: oklch(0.14 0 0); --fg: oklch(0.96 0.005 85); --muted: oklch(0.72 0.02 85); --gold: oklch(0.78 0.13 85); --line: oklch(1 0 0 / .1); }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: 'Inter Tight', system-ui, sans-serif; -webkit-font-smoothing: antialiased; min-height: 100svh; }
+    .wrap { max-width: 82rem; margin: 0 auto; padding: clamp(3rem, 7vw, 6rem) clamp(1rem, 4vw, 3rem); }
+    .mono { font-family: 'DM Mono', monospace; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+    h1 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: clamp(2.75rem, 6vw + 1rem, 6rem); line-height: .98; letter-spacing: -.02em; margin: 1.25rem 0 1.5rem; }
+    h1 em { color: var(--gold); }
+    .lead { color: var(--muted); font-size: clamp(1.05rem, .5vw + 1rem, 1.3rem); max-width: 40rem; line-height: 1.55; margin: 0; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: clamp(3rem, 6vw, 5rem); }
+    a.card { display: flex; flex-direction: column; color: inherit; text-decoration: none; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: oklch(0.17 0.004 85); transition: transform .6s cubic-bezier(.22,1,.36,1), border-color .4s; }
+    a.card:hover { transform: translateY(-6px); border-color: oklch(0.78 0.13 85 / .5); }
+    .thumb { aspect-ratio: 16/10; position: relative; overflow: hidden; display: grid; place-items: center; }
+    .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.22,1,.36,1); }
+    a.card:hover .thumb img { transform: scale(1.05); }
+    .t1 img { filter: brightness(.55); } .t3 img { filter: brightness(.45); }
+    .thumb .label { position: relative; z-index: 1; font-family: 'DM Serif Display', serif; font-size: clamp(1.75rem, 2.5vw, 2.5rem); text-align: center; line-height: 1; padding: 0 1rem; }
+    .t2 { background: #F4F3F0; color: #1A1915; }
+    .t2 .label { font-family: 'Inter Tight', sans-serif; font-weight: 800; letter-spacing: -.055em; }
+    .t2 .label i { font-style: normal; color: oklch(0.82 0.12 85); }
+    .body { padding: 1.5rem; display: grid; gap: .75rem; flex: 1; }
+    .body h2 { margin: 0; font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 1.75rem; letter-spacing: -.01em; }
+    .body p { margin: 0; color: var(--muted); line-height: 1.5; font-size: 1rem; }
+    .body .go { margin-top: auto; color: var(--gold); }
+    footer { border-top: 1px solid var(--line); margin-top: clamp(3rem, 6vw, 5rem); padding-top: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    footer a { color: var(--muted); }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="mono">Venture Forge Austin · Redesign directions</p>
+    <h1>Three ways to <em>forge</em> the next site.</h1>
+    <p class="lead">Each direction is a complete, multi-page site using the same copy, speakers, and imagery from ventureforgeaustin.org. Open one, then scroll — most of the craft is in the motion.</p>
+    <div class="grid">
+      <a class="card" href="v1-refresh/index.html">
+        <div class="thumb t1"><img src="assets/img/photos/hero-austin.jpg" alt=""><span class="label">Investing in innovation.</span></div>
+        <div class="body"><p class="mono">01 · Refresh</p><h2>Minor upgrade</h2><p>Same palette, copy, and section order. A real type scale, forge-seam lines, ember particles, masked headline reveals, and section-to-section transitions.</p><span class="mono go">Open V1 →</span></div>
+      </a>
+      <a class="card" href="v2-telescope/index.html">
+        <div class="thumb t2"><span class="label">Venture F<i>✺</i>rge</span></div>
+        <div class="body"><p class="mono">02 · Telescope</p><h2>Bold reinvention</h2><p>Editorial off-white canvas, floating image field, curator-style spotlights, scroll-filled statements, a network grid with LinkedIn connect, and a text-only wordmark.</p><span class="mono go">Open V2 →</span></div>
+      </a>
+      <a class="card" href="v3-hybrid/index.html">
+        <div class="thumb t3"><img src="assets/img/photos/forge.jpg" alt=""><span class="label">The middle ground</span></div>
+        <div class="body"><p class="mono">03 · Hybrid</p><h2>Familiar, but new</h2><p>Brand dark-and-gold with Telescope DNA: a hero that shrinks into a card, a pinned speaker track, the network grid, scroll-lit agenda, and a docked pill nav.</p><span class="mono go">Open V3 →</span></div>
+      </a>
+    </div>
+    <footer class="mono"><span>Prototype · not for public release</span><a href="https://www.ventureforgeaustin.org/" target="_blank" rel="noopener">Live site ↗</a></footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speakers — Venture Forge</title>
+  <meta name="description" content="Founders, investors, and leaders gathering in Austin on September 23–24, 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Inter+Tight:wght@400;500;800&family=Outfit:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main>
+  <section class="p-hero">
+    <div class="floaters" aria-hidden="true">
+      <img src="../assets/img/speakers/mark-mcclain.jpg" alt="" data-d="1.3" style="width:9rem;height:11rem;left:7%;top:12%">
+      <img src="../assets/img/speakers/renji-bijoy.jpg" alt="" data-d=".6" style="width:5rem;height:6rem;left:30%;top:6%">
+      <img src="../assets/img/speakers/jeff-johns.jpg" alt="" data-d="1" style="width:6rem;height:7rem;right:12%;top:14%">
+      <img src="../assets/img/speakers/derek-welborn.jpg" alt="" data-d="1.6" style="width:8rem;height:11rem;right:5%;top:56%">
+      <img src="../assets/img/speakers/jenn-mazzola.jpg" alt="" data-d=".8" style="width:7rem;height:8rem;left:12%;top:66%">
+      <img src="../assets/img/speakers/sean-riley.jpg" alt="" data-d=".4" style="width:4rem;height:5rem;left:58%;top:84%">
+    </div>
+    <div style="position:relative;z-index:1">
+      <p class="kicker mono">2026 Lineup</p>
+      <h1>The voices on the forge floor</h1>
+      <p class="lead">Founders, investors, and leaders gathering in Austin to forge what's next for the Kingdom economy.</p>
+    </div>
+  </section>
+
+  <section style="padding-bottom:clamp(4rem,8vw,8rem)">
+    <div class="masonry" data-render="speaker-cards"></div>
+    <p class="mono gray center" style="margin-top:-2rem">Tap a portrait to read the bio · <span style="color:#0A66C2">in</span> to connect</p>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div style="display:flex;justify-content:space-between;align-items:end;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem">
+        <h2 class="display">Kingdom-minded companies<br>on day two</h2>
+        <p class="mono gray">Founders Showcase</p>
+      </div>
+      <div class="cards-row" data-render="showcase-row"></div>
+    </div>
+  </section>
+
+  <section class="s-join">
+    <div>
+      <h2>Join them in Austin</h2>
+      <a class="btn-dark" data-href="register" target="_blank" rel="noopener">Register</a>
+      <p class="mono gray" style="margin-top:1.5rem">September 23–24, 2026 · Riverbend Centre</p>
+    </div>
+  </section>
+</main>
+<script src="../assets/js/data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
