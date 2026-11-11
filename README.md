@@ -1,6 +1,6 @@
-# Venture Forge — Six Redesign Directions
+# Venture Forge — Five Redesign Directions
 
-Static HTML/CSS/JS prototypes of [ventureforgeaustin.org](https://www.ventureforgeaustin.org/). Six directions. Every version includes all six pages: Home, 2026 Event, Speakers, Vision, Partner, and FAQ.
+Static HTML/CSS/JS prototypes of [ventureforgeaustin.org](https://www.ventureforgeaustin.org/). Five directions. Every version includes all six pages: Home, 2026 Event, Speakers, Vision, Partner, and FAQ.
 
 | Folder | Direction | In one line |
 |---|---|---|
@@ -8,10 +8,9 @@ Static HTML/CSS/JS prototypes of [ventureforgeaustin.org](https://www.venturefor
 | `v2-telescope/` | Telescope-inspired | Editorial off-white layout with scroll-driven scenes, a floating image field, a network grid with LinkedIn connect, and a text-only wordmark. |
 | `v3-hybrid/` | Hybrid | Brand dark-and-gold with Telescope-style interactions: hero shrink, pinned speaker track, network grid, word-fill text, and a docked nav. |
 | `v4-founders-club/` | Founders Club-inspired | Cinematic photo hero, line-lit serif copy, curtain headline, dot-matrix Texas map, wax-seal stats, voices wall, flat-lay, framed video. |
-| `v5-melius/` | Melius-inspired | Dotted canvas, scrambling headline word, molten blob, pinned node-graph showcase, floating-tag carousel, node cards. |
-| `v6-notion/` | Notion-inspired | Typing pill headline, workspace mockup with views, doodles, bento cards; inner pages built as docs with toggles, databases, and side peek. |
+| `v5-district/` | District Church-inspired | All-caps poster headlines, torn-paper edges, topographic texture, stamp badge, halftone cut-outs, numbered step cards, date-badge agenda cards. |
 
-`index.html` at the root links to all six. V4–V6 borrow layout, motion, and features from their reference sites but keep Venture Forge's own fonts, colors, logo, and wording.
+`index.html` at the root links to all five. V4–V5 borrow layout, motion, and features from their reference sites but keep Venture Forge's own fonts, colors, logo, and wording.
 
 ## Run locally
 
@@ -33,10 +32,10 @@ assets/
   img/photos/       ← hero, forge, and summit photography from the live site
   img/network/      ← PLACEHOLDER headshots (pravatar.cc), replace before launch
   video/            ← hero skyline video from the live site
-v1-refresh/ … v6-notion/   ← each has css/style.css, js/main.js, 6 pages
+v1-refresh/ … v5-district/   ← each has css/style.css, js/main.js, 6 pages
 ```
 
-Edit copy for speakers, the schedule, FAQ, and sponsorship tiers once in `assets/js/data.js`. All six versions read from it.
+Edit copy for speakers, the schedule, FAQ, and sponsorship tiers once in `assets/js/data.js`. All five versions read from it.
 
 ## Before launch
 
