@@ -76,7 +76,7 @@
     ['24', 'photos/forge.jpg', 'Keynote: Faith Journey and Taking on Challenges', 'Thursday · 2:45 PM'],
     ['24', 'speakers/todd-engstrom.jpg', 'Unity: Myth or Reality', 'Thursday · 3:45 PM']
   ];
-  $$('[data-render="events"]').forEach((el) => { el.innerHTML = EVENTS.map(([d, src, t, w]) => `<article class="ecard" data-up><div class="ph"><img src="${IMG}${src}" alt="" loading="lazy"><span class="date"><b>${d}</b><span>SEPT</span></span></div><div class="b"><h3>${esc(t)}</h3><p>${esc(w)}</p></div></article>`).join(''); });
+  $$('[data-render="events"]').forEach((el) => { el.innerHTML = EVENTS.map(([d, , t, w]) => `<article class="ecard ev" data-up><div class="b"><h3>${esc(t)}</h3><p>${esc(w)}</p></div><span class="date"><b>${d}</b><span>SEPT</span></span></article>`).join(''); });
   $$('[data-render="showcase"]').forEach((el) => { el.innerHTML = VF.showcase.map((c) => `<a class="ecard" href="${c.url}" target="_blank" rel="noopener" data-up><div class="ph" style="background:#fff;display:grid;place-items:center"><img src="${c.logo}" alt="" style="width:62%;height:62%;object-fit:contain"></div><div class="b"><h3>${esc(c.name)}</h3><p>${esc(c.people)} · Visit site »</p></div></a>`).join(''); });
   $$('[data-render="logos"]').forEach((el) => { el.innerHTML = VF.partners.map((p) => `<div><img src="${p.logo}" alt="${esc(p.name)}" loading="lazy"></div>`).join(''); });
   $$('[data-render="sched"]').forEach((el) => { el.innerHTML = VF.schedule.map((d) => `<div class="day" data-up><h3 class="caps">${esc(d.day)} <span class="script">${esc(d.theme)}</span></h3><ol>${d.items.map(([t, s]) => `<li><time>${t}</time><span>${esc(s)}</span></li>`).join('')}</ol></div>`).join(''); });
@@ -128,8 +128,6 @@
     // Counters
     $$('[data-count]').forEach((el) => { const end = +el.dataset.count, o = { v: 0 }; gsap.to(o, { v: end, duration: 2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true }, onUpdate: () => { el.textContent = Math.round(o.v) + (el.dataset.suffix || ''); } }); });
 
-    // Feature frame outline word drifts
-    $$('.feature .frame .over').forEach((o) => gsap.fromTo(o, { xPercent: -8 }, { xPercent: 8, ease: 'none', scrollTrigger: { trigger: o.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
     // Bands parallax
     $$('.band > img').forEach((img) => gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
     // Event row nudges sideways as you scroll past
