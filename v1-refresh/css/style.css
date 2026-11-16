@@ -299,7 +299,8 @@ section { position: relative; }
 .split--top { align-items: start; }
 @media (max-width: 960px) { .split { grid-template-columns: 1fr; } }
 .media { position: relative; overflow: hidden; aspect-ratio: 4/5; }
-.media img, .media video { width: 100%; height: 115%; object-fit: cover; }
+.media img, .media video { position: absolute; left: 0; top: -7.5%; width: 100%; height: 115%; object-fit: cover; }
+.media.event-photo { max-width: 60rem; margin: clamp(3.5rem, 7vw, 6rem) auto 0; }
 .media.wide { aspect-ratio: 16/11; }
 .media .cap { position: absolute; left: 1.25rem; bottom: 1.25rem; z-index: 2; font-size: var(--t-xs); letter-spacing: .22em; text-transform: uppercase; color: var(--fg); display: flex; gap: .75rem; align-items: center; }
 .media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, oklch(0.14 0 0 / .6), transparent 50%); }

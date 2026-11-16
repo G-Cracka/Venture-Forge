@@ -1,6 +1,8 @@
 /* Venture Forge — V2 Telescope: chrome, renderers, scroll scenes */
 (function () {
   const VF = window.VF;
+  // Lion's Den: dark-lettered logo so it reads on light backgrounds
+  VF.partners.forEach((p) => { p.logo = p.logo.replace('partner-lion.png', 'partner-lion-dark.png'); });
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -60,7 +62,7 @@
         <div class="c"><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">${IC.li.replace('<svg ', '<svg width="16" height="16" ')}</a><a href="${VF.links.email}" aria-label="Email">${IC.mail}</a><a href="${VF.links.chat}" target="_blank" rel="noopener" aria-label="Event chat">${IC.chat}</a></div>
         <div class="r mono"><a href="partner.html">Partner</a><a class="btn-gold" href="${VF.links.register}" target="_blank" rel="noopener">Register</a></div>
       </div>
-      <div class="giant">${wordmark(true)}</div>
+      <div class="giant"><img class="vf-logo" src="${VF.IMG}logos/vf-logo-dark.png" alt="Venture Forge"></div>
       <div class="small mono"><span>© 2026 Venture-Forge Austin</span><span>Riverbend Centre · Austin, Texas</span><span>Faith · Capital · Calling</span></div>
     </div>`;
   document.body.append(footer);
@@ -120,8 +122,7 @@
   $$('[data-render="tiers"]').forEach((el) => {
     el.innerHTML = VF.tiers.map((t, i) => `
       <article class="tier2${i === 0 ? ' feat' : ''}" data-rise>
-        ${t.reserved ? '<span class="tag mono">Reserved</span>' : ''}
-        <p class="mono">${esc(t.name)}</p><p class="price">${t.price}</p>
+        <div class="tier-head"><p class="mono">${esc(t.name)}</p>${t.reserved ? '<span class="tag mono">Reserved</span>' : ''}</div><p class="price">${t.price}</p>
         <ul>${t.perks.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>
         <a class="btn-line" href="${VF.links.sponsor}" target="_blank" rel="noopener">Register for sponsorship ${IC.arrow.replace('<svg ', '<svg width="12" height="12" ')}</a>
       </article>`).join('');
@@ -201,7 +202,7 @@
     // Inner page hero words + floaters
     $$('.p-hero h1').forEach((h) => { const ws = splitWords(h, 'w'); gsap.from(ws, { yPercent: 60, opacity: 0, duration: 1.3, ease: 'expo.out', stagger: .06, delay: .1 }); });
     gsap.from('.p-hero .kicker, .p-hero .lead, .p-hero .cta-row', { opacity: 0, y: 20, duration: 1.2, ease: 'expo.out', delay: .5, stagger: .1 });
-    $$('.floaters').forEach((f) => {
+    $$('.p-hero .floaters').forEach((f) => {
       $$('img', f).forEach((img, i) => {
         const d = +img.dataset.d || 1;
         gsap.fromTo(img, { opacity: 0, scale: .7 }, { opacity: 1, scale: 1, duration: 1.4, ease: 'expo.out', delay: .2 + i * .06 });
@@ -217,7 +218,7 @@
     $$('.masonry').forEach((m) => $$('.col', m).forEach((c, i) => gsap.to(c, { y: () => -[0, 120, 40, 200][i % 4] * (vh() / 900), ease: 'none', scrollTrigger: { trigger: m, start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true } })));
 
     // Footer wordmark rise
-    gsap.from('.site-footer .giant .wordmark', { yPercent: 40, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.site-footer', start: 'top bottom', end: 'bottom bottom', scrub: true } });
+    gsap.from('.site-footer .giant .vf-logo', { yPercent: 40, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.site-footer', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
     ScrollTrigger.refresh();
   }
@@ -247,7 +248,7 @@
     gsap.set([...l2w, inline], { opacity: 0, yPercent: 60 });
 
     const frame = $('#hero .takeover .frame');
-    const ir = () => { const r = inline.getBoundingClientRect(), h = $('#hero').getBoundingClientRect(); return { x: r.left - h.left + r.width / 2 - vw() / 2, y: r.top - h.top + r.height / 2 - vh() / 2, w: r.width, h: r.height }; };
+    const ir = () => { const t = inline.style.transform; inline.style.transform = 'none'; const r = inline.getBoundingClientRect(), h = $('#hero').getBoundingClientRect(); inline.style.transform = t; return { x: r.left - h.left + r.width / 2 - vw() / 2, y: r.top - h.top + r.height / 2 - vh() / 2, w: r.width, h: r.height }; };
     gsap.set(frame, { xPercent: -50, yPercent: -50, x: () => ir().x, y: () => ir().y, width: () => ir().w, height: () => ir().h, opacity: 0 });
     const slides = $$('#hero .curator .slide'), frames = $$('#hero .takeover .frame img'), dots = $$('#hero .curator .dots i');
     gsap.set(slides, { opacity: 0 }); gsap.set(frames.slice(1), { opacity: 0 });
@@ -288,7 +289,6 @@
     const coll = $('.collection');
     if (coll) {
       gsap.fromTo(coll, { clipPath: 'inset(8% 28% 0% 28% round 6px)' }, { clipPath: 'inset(0% 0% 0% 0% round 4px)', ease: 'none', scrollTrigger: { trigger: coll, start: 'top 95%', end: 'top top', scrub: true } });
-      gsap.to('.collection .head .cover', { yPercent: -60, scale: .55, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.collection .head', start: 'top top', end: 'bottom top', scrub: true } });
       gsap.from('.collection .head h2, .collection .head .sub, .collection .head .kicker', { y: 50, opacity: 0, stagger: .08, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.collection .head', start: 'top 55%', once: true } });
     }
 
@@ -317,27 +317,36 @@
       gsap.set(grow, { x: () => place().x, y: () => place().y, width: () => place().w, height: () => place().h, xPercent: -50, yPercent: -50 });
       const zl = $$('.agenda line', zoom);
       zl.forEach((l) => { l.style.strokeDasharray = "none"; });
-      const zt = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: zoom, start: 'top top', end: '+=520%', pin: true, scrub: 1, invalidateOnRefresh: true } });
+      // "The agenda" title: starts big and centred, then settles into its label spot
+      const lbl = $('.agenda .lbl', zoom);
+      const lblTo = () => ({ x: vw() / 2 - (lbl.offsetLeft + lbl.offsetWidth / 2), y: vh() / 2 - (lbl.offsetTop + lbl.offsetHeight / 2), s: Math.min(6, Math.max(2.5, vw() / 240)) });
+      const rest = ['.s-zoom .agenda .lines', '.s-zoom .agenda .list', '.s-zoom .agenda .chip', '.s-zoom .agenda .thumbs'];
+      gsap.set('.s-zoom .agenda', { opacity: 1 });
+      gsap.set(rest, { opacity: 0 });
+      gsap.set(lbl, { opacity: 0, xPercent: 0, yPercent: 0 });
+      const zt = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: zoom, start: 'top top', end: '+=640%', pin: true, scrub: 1, invalidateOnRefresh: true } });
       zt.to(lt, { x: () => -vw() * .35, opacity: 0, duration: .2, ease: 'power2.in' }, .05)
         .to(rt, { x: () => vw() * .35, opacity: 0, duration: .2, ease: 'power2.in' }, .05)
         .to(grow, { x: 0, y: 0, width: () => vw(), height: () => vh(), duration: .22, ease: 'power2.inOut' }, .05)
         .to('.s-zoom .veil', { opacity: 1, duration: .06 }, .24)
-        .to('.s-zoom .agenda', { opacity: 1, duration: .06 }, .27)
-        .to(zl, { strokeDashoffset: 0, duration: .1, stagger: .03 }, .27)
-        .fromTo(list, { y: 0 }, { y: () => -(list.scrollHeight - vh() * .7), duration: .68 }, .32);
+        .fromTo(lbl, { opacity: 0, x: () => lblTo().x, y: () => lblTo().y + 30, scale: () => lblTo().s }, { opacity: 1, y: () => lblTo().y, duration: .07, ease: 'power2.out' }, .27)
+        .to(lbl, { x: 0, y: 0, scale: 1, duration: .12, ease: 'power3.inOut' }, .4)
+        .to(rest, { opacity: 1, duration: .06, stagger: .015 }, .52)
+        .fromTo(list, { y: 0 }, { y: () => -(list.scrollHeight - vh() * .7), duration: .6 }, .56);
+      const listOn = .55;
       zt.eventCallback('onUpdate', () => {
-        const p = zt.progress();
+        const t = zt.time();
         const c = $('.agenda .list', zoom).getBoundingClientRect(); const mid = c.top + c.height / 2;
         let best = 0, bd = 1e9; items.forEach((li, i) => { const r = li.getBoundingClientRect(); const d = Math.abs(r.top + r.height / 2 - mid); if (d < bd) { bd = d; best = i; } });
-        items.forEach((li, i) => li.classList.toggle('on', i === best && p > .3));
-        const b = p < .55 ? 0 : p < .8 ? 1 : 2; bgs.forEach((im, i) => im.classList.toggle('on', i === b));
+        items.forEach((li, i) => li.classList.toggle('on', i === best && t > listOn));
+        const b = t < .75 ? 0 : t < .95 ? 1 : 2; bgs.forEach((im, i) => im.classList.toggle('on', i === b));
       });
-      $$('.agenda .thumbs img', zoom).forEach((im, i) => gsap.fromTo(im, { y: vh() * .6 }, { y: -vh() * .6, ease: 'none', scrollTrigger: { trigger: zoom, start: 'top top', end: '+=520%', scrub: true } }));
+      $$('.agenda .thumbs img', zoom).forEach((im) => gsap.fromTo(im, { y: vh() * .9 }, { y: -vh() * .6, ease: 'none', scrollTrigger: { trigger: zoom, start: 'top top', end: '+=640%', scrub: true } }));
     }
 
     /* Scene 8: floaters drift across closing statement */
     $$('.s-close .floaters img').forEach((img) => { const d = +img.dataset.d || 1; gsap.fromTo(img, { y: vh() * .4 * d }, { y: -vh() * .6 * d, ease: 'none', scrollTrigger: { trigger: '.s-close', start: 'top bottom', end: 'bottom top', scrub: true } }); });
-    gsap.from('.s-join h2, .s-join .btn-dark', { y: 40, opacity: 0, stagger: .1, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.s-join', start: 'top 60%', once: true } });
+    gsap.from('.s-join h2, .s-join .join-btn', { y: 40, opacity: 0, stagger: .1, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.s-join', start: 'top 60%', once: true } });
   }
 
   if (document.readyState === 'complete') motion(); else addEventListener('load', motion);

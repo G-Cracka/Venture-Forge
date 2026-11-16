@@ -147,8 +147,8 @@ h1, h2, h3, h4, p { margin: 0; font-weight: 400; }
 .p-card .ph { position: relative; aspect-ratio: 4/5; background: #E9E7E2; overflow: hidden; }
 .p-card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
 .p-card:hover .ph img { transform: scale(1.05); }
-.p-card .ph .logo-chip { position: absolute; left: .6rem; top: .6rem; background: #fff; border-radius: 4px; padding: .45rem .6rem; height: 2.4rem; display: grid; place-items: center; }
-.p-card .ph .logo-chip img { height: 100%; width: auto; max-width: 6rem; object-fit: contain; }
+.p-card .ph .logo-chip { position: absolute; left: .6rem; top: .6rem; background: #fff; border-radius: 4px; padding: .4rem .6rem; width: 7.25rem; height: 2.6rem; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.p-card .ph .logo-chip img { width: 100%; height: 100%; object-fit: contain; transform: none !important; }
 .p-card .t { margin-top: .7rem; font-size: 1rem; letter-spacing: -.02em; }
 .p-card .s { margin-top: .2rem; color: var(--gray); }
 .corner-btn { position: absolute; right: .55rem; bottom: .55rem; width: 1.9rem; height: 1.9rem; border-radius: 5px; background: #fff; color: var(--ink); display: grid; place-items: center; transition: background .3s, color .3s, transform .4s var(--ease); z-index: 2; }
@@ -164,8 +164,6 @@ h1, h2, h3, h4, p { margin: 0; font-weight: 400; }
 .collection .head h2 { font-size: clamp(3rem, 6.6vw + 1rem, 8rem); letter-spacing: -.05em; line-height: .95; }
 .collection .head .sub { margin-top: 1.25rem; font-size: var(--t-lead); letter-spacing: -.025em; color: var(--ink); }
 .collection .head .meta { position: absolute; left: var(--pad); right: var(--pad); bottom: 2rem; display: flex; justify-content: space-between; color: var(--gray); }
-.collection .head .cover { position: absolute; width: clamp(9rem, 16vw, 15rem); aspect-ratio: 4/5; left: 50%; top: 50%; translate: -50% -50%; overflow: hidden; z-index: 0; }
-.collection .head .cover img { width: 100%; height: 100%; object-fit: cover; }
 .collection .head > *:not(.cover) { position: relative; z-index: 1; }
 .masonry { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(.75rem, 1.6vw, 1.5rem); padding: 0 var(--pad) clamp(5rem, 10vw, 9rem); align-items: start; }
 .masonry .col { display: grid; gap: clamp(2rem, 4vw, 3.5rem); will-change: transform; }
@@ -200,7 +198,7 @@ h1, h2, h3, h4, p { margin: 0; font-weight: 400; }
 .agenda { position: absolute; inset: 0; z-index: 3; color: #fff; opacity: 0; pointer-events: none; }
 .agenda svg.lines { position: absolute; inset: 0; width: 100%; height: 100%; }
 .agenda svg.lines line { stroke: rgba(255,255,255,.7); stroke-width: 1; }
-.agenda .lbl { position: absolute; left: 14%; top: 50%; transform: translateY(-50%); font-size: 1rem; }
+.agenda .lbl { position: absolute; left: 14%; top: 50%; margin-top: -.65em; font-size: 1rem; line-height: 1.3; white-space: nowrap; transform-origin: center; }
 .agenda .list { position: absolute; left: 25%; right: 8%; top: 50%; transform: translateY(-50%); height: 70vh; overflow: hidden; mask-image: linear-gradient(transparent, #000 25%, #000 75%, transparent); }
 .agenda .list ul { list-style: none; margin: 0; padding: 30vh 0; will-change: transform; }
 .agenda .list li { font-size: clamp(1.75rem, 3.2vw, 3.4rem); letter-spacing: -.04em; line-height: 1.22; opacity: .3; transition: opacity .35s; white-space: nowrap; }
@@ -210,7 +208,7 @@ h1, h2, h3, h4, p { margin: 0; font-weight: 400; }
 .agenda .chip img { width: 2.2rem; height: 2.2rem; object-fit: cover; border-radius: 3px; }
 .agenda .chip b { display: block; font-weight: 400; font-size: .95rem; letter-spacing: -.02em; }
 .agenda .thumbs img { position: absolute; width: 5rem; height: 6rem; object-fit: cover; border: 2px solid #fff; }
-@media (max-width: 720px) { .agenda .lbl { left: var(--pad); top: 6rem; transform: none; } .agenda .list { left: var(--pad); right: var(--pad); } .agenda .list li { white-space: normal; font-size: 1.6rem; } .agenda .thumbs { display: none; } }
+@media (max-width: 720px) { .agenda .lbl { left: var(--pad); top: 6rem; margin-top: 0; } .agenda .list { left: var(--pad); right: var(--pad); } .agenda .list li { white-space: normal; font-size: 1.6rem; } .agenda .thumbs { display: none; } }
 
 /* ---------- Scene 8/9: Closing ---------- */
 .s-close { min-height: 100svh; display: grid; place-items: center; text-align: center; position: relative; overflow: hidden; z-index: 5; background: var(--bg); padding: 8rem var(--pad); }
@@ -231,7 +229,7 @@ h1, h2, h3, h4, p { margin: 0; font-weight: 400; }
 .site-footer .top .c a:hover { background: var(--bg); }
 .site-footer .top .r { display: flex; gap: 1rem; justify-content: flex-end; align-items: center; }
 .site-footer .giant { margin-top: clamp(4rem, 10vw, 9rem); display: flex; justify-content: center; }
-.site-footer .giant .wordmark { font-size: clamp(3.5rem, 13.5vw, 15rem); }
+.site-footer .giant .vf-logo { width: min(100%, 52rem); height: auto; }
 .site-footer .small { display: flex; justify-content: space-between; margin-top: 3rem; color: var(--gray); gap: 1rem; flex-wrap: wrap; }
 @media (max-width: 860px) { .site-footer .top { grid-template-columns: 1fr; justify-items: start; } .site-footer .top .r { justify-content: flex-start; } }
 
@@ -308,7 +306,8 @@ h1, h2, h3, h4, p { margin: 0; font-weight: 400; }
 .tier2.feat ul { border-color: rgba(255,255,255,.18); }
 .tier2 li { font-size: .95rem; line-height: 1.35; letter-spacing: -.01em; display: grid; grid-template-columns: 1rem 1fr; }
 .tier2 li::before { content: '—'; color: var(--gray); }
-.tier2 .tag { position: absolute; right: 1rem; top: 1rem; background: var(--gold); color: var(--ink); border-radius: 999px; padding: .3rem .65rem; }
+.tier2 .tier-head { display: flex; align-items: center; justify-content: space-between; gap: .75rem; min-height: 1.75rem; }
+.tier2 .tag { flex: none; background: var(--gold); color: var(--ink); border-radius: 999px; padding: .3rem .65rem; }
 .tier2.feat .btn-line { color: #fff; }
 .tier2.feat .btn-line:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
 @media (max-width: 1100px) { .tiers-v2 { grid-template-columns: 1fr 1fr; } }

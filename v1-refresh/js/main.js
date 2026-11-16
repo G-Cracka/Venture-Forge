@@ -1,6 +1,8 @@
 /* Venture Forge — V1 Refresh: chrome, renderers, motion */
 (function () {
   const VF = window.VF;
+  // Lion's Den: dark-lettered logo so it reads on light backgrounds
+  VF.partners.forEach((p) => { p.logo = p.logo.replace('partner-lion.png', 'partner-lion-dark.png'); });
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -229,7 +231,7 @@
     $$('.movement').forEach((m) => ScrollTrigger.create({ trigger: m, start: 'top 80%', once: true, onEnter: () => m.classList.add('in') }));
 
     // Media parallax
-    $$('.media img, .media video, .banner img').forEach((img) => gsap.fromTo(img, { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
+    $$('.media img, .media video, .banner img').forEach((img) => gsap.fromTo(img, { yPercent: img.closest('.media') ? -6.5 : -8 }, { yPercent: img.closest('.media') ? 6.5 : 8, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
     // Media clip wipe
     $$('.media').forEach((m) => gsap.from(m, { clipPath: 'inset(100% 0 0 0)', duration: 1.6, ease: 'expo.inOut', scrollTrigger: { trigger: m, start: 'top 80%', once: true } }));
 
