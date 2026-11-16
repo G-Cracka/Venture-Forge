@@ -1,4 +1,9 @@
 {
   "cleanUrls": false,
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/v6-refresh-reworded/:path*", "destination": "/v4-refresh-reworded/:path*", "permanent": false },
+    { "source": "/v4-founders-club/:path*", "destination": "/v5-founders-club/:path*", "permanent": false },
+    { "source": "/v5-district/:path*", "destination": "/v6-district/:path*", "permanent": false }
+  ]
 }
