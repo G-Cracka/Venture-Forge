@@ -124,7 +124,7 @@ em, .gold { color: var(--gold); font-style: italic; }
 .site-header.scrolled { background: oklch(0.14 0 0 / 0.72); backdrop-filter: blur(14px) saturate(1.3); border-bottom: 1px solid var(--line); }
 .site-header.scrolled .bar { height: 4.25rem; }
 .site-header.hide { transform: translateY(-100%); }
-.logo img { height: 2.75rem; width: auto; transition: height .5s var(--ease); }
+.logo img { height: 2.9rem; width: auto; transition: height .5s var(--ease); }
 .scrolled .logo img { height: 2.25rem; }
 .nav { display: flex; align-items: center; gap: 2.25rem; }
 .nav a:not(.btn) { position: relative; font-size: var(--t-sm); color: var(--fg); opacity: .85; transition: opacity .3s; }
@@ -299,7 +299,11 @@ section { position: relative; }
 .split--top { align-items: start; }
 @media (max-width: 960px) { .split { grid-template-columns: 1fr; } }
 .media { position: relative; overflow: hidden; aspect-ratio: 4/5; }
-.media img, .media video { width: 100%; height: 115%; object-fit: cover; }
+.media img, .media video { position: absolute; left: 0; top: -7.5%; width: 100%; height: 115%; object-fit: cover; }
+/* Vision page: photo sits centred in the viewport beside the text */
+.vision-pic { position: sticky; top: 15svh; }
+.vision-pic .media { aspect-ratio: auto; height: 70svh; }
+@media (max-width: 960px) { .vision-pic { position: relative; top: 0; } .vision-pic .media { height: auto; aspect-ratio: 4/5; } }
 .media.wide { aspect-ratio: 16/11; }
 .media .cap { position: absolute; left: 1.25rem; bottom: 1.25rem; z-index: 2; font-size: var(--t-xs); letter-spacing: .22em; text-transform: uppercase; color: var(--fg); display: flex; gap: .75rem; align-items: center; }
 .media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, oklch(0.14 0 0 / .6), transparent 50%); }
@@ -329,7 +333,8 @@ section { position: relative; }
 .site-footer ul a { color: var(--muted); font-size: var(--t-sm); transition: color .3s; }
 .site-footer ul a:hover { color: var(--fg); }
 .site-footer .bottom { border-top: 1px solid var(--line); padding-block: 1.75rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: var(--t-xs); color: var(--muted); letter-spacing: .04em; }
-.site-footer .giant { font-family: var(--f-display); font-size: clamp(4rem, 15.5vw, 16rem); line-height: .8; letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1px oklch(1 0 0 / .14); white-space: nowrap; margin-bottom: -.12em; user-select: none; text-align: center; }
+.site-footer .giant { display: flex; justify-content: center; padding: clamp(2rem, 5vw, 4rem) var(--gutter) clamp(3rem, 6vw, 5rem); user-select: none; }
+.site-footer .giant img { width: min(100%, 48rem); height: auto; }
 @media (max-width: 760px) { .site-footer .top { grid-template-columns: 1fr 1fr; } .site-footer .brand { grid-column: 1 / -1; } }
 
 /* ---------- Event page ---------- */
@@ -479,7 +484,7 @@ h1, h2, h3 { letter-spacing: -.02em; }
 .shrink-hero .vid .shade { position: absolute; inset: 0; background: linear-gradient(to top, oklch(0.14 0 0 / .92), oklch(0.14 0 0 / .35) 45%, oklch(0.14 0 0 / .35)); }
 .shrink-hero .copy { position: absolute; inset: 0; z-index: 3; display: flex; align-items: flex-end; }
 .shrink-hero .copy .wrap { padding-bottom: clamp(3.5rem, 8vh, 6rem); width: 100%; }
-.shrink-hero h1 { max-width: 14ch; }
+.shrink-hero h1 { max-width: 16ch; font-size: clamp(2.75rem, 3.6vw + 1rem, 5.5rem); }
 .shrink-hero h1 .line { display: block; overflow: hidden; padding-bottom: .06em; }
 .shrink-hero h1 .line > span { display: inline-block; }
 .shrink-hero .eyebrow { color: var(--fg); margin-bottom: 2rem; }
@@ -491,8 +496,11 @@ h1, h2, h3 { letter-spacing: -.02em; }
 .shrink-hero .card-cap { position: absolute; z-index: 3; left: 50%; bottom: 3vh; translate: -50% 0; opacity: 0; font-family: var(--f-mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 
 /* Horizontal lineup (pinned) */
-.hscroll { position: relative; overflow: hidden; }
-.hscroll .track { display: flex; gap: 1.25rem; padding-inline: var(--gutter); width: max-content; will-change: transform; }
+.hscroll { position: relative; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; }
+.hscroll::-webkit-scrollbar { display: none; }
+.hscroll.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.hscroll .track { display: flex; gap: 1.25rem; padding-inline: var(--gutter); width: max-content; }
+.hscroll .speaker { scroll-snap-align: start; scroll-margin-left: var(--gutter); }
 .hscroll .speaker { width: clamp(16rem, 22vw, 20rem); flex: none; }
 .hscroll .count { font-family: var(--f-mono); font-size: .78rem; color: var(--muted); letter-spacing: .08em; }
 .speaker .li { position: absolute; right: .6rem; bottom: .6rem; z-index: 3; width: 2rem; height: 2rem; border-radius: 6px; background: #fff; color: #0A66C2; display: grid; place-items: center; transition: background .3s, color .3s, transform .4s var(--ease); }
@@ -543,7 +551,8 @@ h1, h2, h3 { letter-spacing: -.02em; }
 /* Docked pill (appears after hero) */
 .dock3 { position: fixed; left: 50%; bottom: 1.1rem; z-index: 60; translate: -50% 160%; transition: translate .7s var(--ease); display: flex; align-items: center; gap: .35rem; padding: .35rem .35rem .35rem 1.1rem; border-radius: 999px; background: oklch(0.19 0.004 85 / .78); backdrop-filter: blur(16px) saturate(1.4); border: 1px solid var(--line); box-shadow: 0 20px 50px -20px #000; }
 .dock3.show { translate: -50% 0; }
-.dock3 .wm { font-family: var(--f-display); font-size: 1.2rem; margin-right: .75rem; white-space: nowrap; }
+.dock3 .wm { display: flex; align-items: center; margin-right: .75rem; }
+.dock3 .wm img { height: 1.9rem; width: auto; }
 .dock3 .wm em { color: var(--gold); }
 .dock3 button, .dock3 a.reg { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; padding: .8rem 1rem; border-radius: 999px; }
 .dock3 button:hover { background: oklch(1 0 0 / .08); }

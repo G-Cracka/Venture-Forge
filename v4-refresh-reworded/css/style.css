@@ -476,6 +476,7 @@ section { position: relative; }
 .molten { background: linear-gradient(100deg, var(--gold-lo) 0%, var(--gold) 25%, var(--gold-hi) 40%, oklch(0.75 0.17 55) 52%, var(--gold) 65%, var(--gold-lo) 100%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: melt 6s ease-in-out infinite alternate; font-style: normal; }
 @keyframes melt { to { background-position: 100% 0; } }
 .glow-word { color: var(--gold); font-weight: 600; text-shadow: 0 0 18px oklch(0.78 0.13 85 / .55); }
+.dull-word { color: var(--gold); font-weight: 600; }
 
 /* When steel grows cold */
 .steel { padding-block: clamp(5.5rem, 10vw, 9rem); overflow: hidden; }
@@ -511,6 +512,7 @@ section { position: relative; }
 .lattice { background-color: var(--cream); background-image:
   repeating-linear-gradient(45deg, oklch(0.18 0 0 / .045) 0 1px, transparent 1px 22px),
   repeating-linear-gradient(-45deg, oklch(0.18 0 0 / .045) 0 1px, transparent 1px 22px); }
+.lattice .btn--ghost { background: var(--cream); }
 
 /* Three movements cards */
 .mv-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: clamp(2.5rem, 5vw, 3.5rem); }

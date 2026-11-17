@@ -20,7 +20,7 @@
   header.className = 'site-header';
   header.innerHTML = `
     <div class="wrap bar">
-      <a class="logo" href="index.html" aria-label="Venture Forge Austin — home"><img src="${VF.IMG}logos/vf-logo-white.png" alt="Venture Forge Austin"></a>
+      <a class="logo" href="index.html" aria-label="Venture Forge Austin — home"><img src="${VF.IMG}logos/vf-logo.png" alt="Venture Forge Austin"></a>
       <nav class="nav" aria-label="Primary">${navLinks}<a class="btn" href="${VF.links.register}" target="_blank" rel="noopener">Register</a></nav>
       <button class="menu-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
     </div>`;
@@ -37,7 +37,7 @@
   $('.menu-btn', header).dataset.menu = 'top';
   document.body.insertAdjacentHTML('beforeend', `
     <div class="dock3" role="navigation" aria-label="Quick">
-      <a class="wm" href="index.html">Venture <em>Forge</em></a>
+      <a class="wm" href="index.html" aria-label="Venture Forge — home"><img src="${VF.IMG}logos/vf-logo.png" alt="Venture Forge"></a>
       <button data-menu="dock" aria-expanded="false">Menu</button>
       <a class="reg" href="${VF.links.register}" target="_blank" rel="noopener">Register</a>
     </div>
@@ -52,7 +52,7 @@
     <div class="wrap">
       <div class="top">
         <div class="brand">
-          <img src="${VF.IMG}logos/vf-logo-white.png" alt="Venture Forge Austin">
+          <img src="${VF.IMG}logos/vf-logo.png" alt="Venture Forge Austin">
           <p><b>Investing in innovation. <em>Forging</em> eternal impact.</b>An invitation-only summit convening investors, founders, and philanthropists in Austin, Texas.</p>
         </div>
         <div><h5>Explore</h5><ul>
@@ -65,7 +65,7 @@
       </div>
       <div class="bottom"><span>© 2026 Venture-Forge Austin. All rights reserved.</span><span>Austin, Texas · September 23–24, 2026</span></div>
     </div>
-    <div class="giant" aria-hidden="true"><span class="ve">Venture</span> F${spark()}rge</div>`;
+    <div class="giant" aria-hidden="true"><img src="${VF.IMG}logos/vf-logo.png" alt=""></div>`;
   document.body.append(footer);
 
   /* ---------- Renderers ---------- */
@@ -202,9 +202,16 @@
     const hs = $('.hscroll');
     if (hs) {
       const track = $('.track', hs); const cnt = $('.count', hs.closest('section'));
-      const dist = () => Math.max(0, track.scrollWidth - vw() + 40);
-      gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: hs.closest('section'), start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true,
-        onUpdate: (s) => { if (cnt) cnt.textContent = String(Math.min(VF.speakers.length, Math.max(1, Math.round(s.progress * (VF.speakers.length - 1)) + 1))).padStart(2, '0') + ' / ' + VF.speakers.length; } } });
+      const card = () => ($('.speaker', track)?.offsetWidth || 300) + 20;
+      const upd = () => { const max = hs.scrollWidth - hs.clientWidth; const p = max > 0 ? hs.scrollLeft / max : 0; if (cnt) cnt.textContent = String(Math.min(VF.speakers.length, Math.max(1, Math.round(p * (VF.speakers.length - 1)) + 1))).padStart(2, '0') + ' / ' + VF.speakers.length; };
+      hs.addEventListener('scroll', upd, { passive: true }); upd();
+      $$('[data-hs]', hs.closest('section')).forEach((b) => b.addEventListener('click', () => hs.scrollBy({ left: (b.dataset.hs === 'next' ? 1 : -1) * card() * 2, behavior: 'smooth' })));
+      // click-and-drag with a mouse
+      let down = false, sx = 0, sl = 0, moved = false;
+      hs.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = hs.scrollLeft; });
+      addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 4) { moved = true; hs.classList.add('dragging'); } hs.scrollLeft = sl - dx; });
+      addEventListener('pointerup', () => { down = false; hs.classList.remove('dragging'); });
+      hs.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
     }
 
     /* --- Reveals --- */
@@ -224,7 +231,7 @@
     $$('.seam').forEach((s) => gsap.fromTo(s, { '--seam': '0%' }, { '--seam': '100%', ease: 'none', scrollTrigger: { trigger: s, start: 'top 95%', end: 'top 35%', scrub: true } }));
     $$('[data-count]').forEach((el) => { const end = +el.dataset.count, o = { v: 0 }; gsap.to(o, { v: end, duration: 2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, onUpdate: () => { el.textContent = Math.round(o.v) + (el.dataset.suffix || ''); } }); });
     $$('.movement').forEach((m) => ScrollTrigger.create({ trigger: m, start: 'top 80%', once: true, onEnter: () => m.classList.add('in') }));
-    $$('.media img, .media video, .banner img').forEach((img) => gsap.fromTo(img, { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
+    $$('.media img, .media video, .banner img').forEach((img) => gsap.fromTo(img, { yPercent: img.closest('.media') ? -6.5 : -8 }, { yPercent: img.closest('.media') ? 6.5 : 8, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
     $$('.media').forEach((m) => gsap.from(m, { clipPath: 'inset(18% 18% 18% 18% round 14px)', ease: 'none', scrollTrigger: { trigger: m, start: 'top 95%', end: 'top 35%', scrub: true } }));
     $$('.cut-top').forEach((s) => gsap.fromTo(s, { clipPath: 'polygon(0 6vw, 50% 6vw, 100% 6vw, 100% 100%, 0 100%)' }, { clipPath: 'polygon(0 3.5vw, 50% 0vw, 100% 3.5vw, 100% 100%, 0 100%)', ease: 'none', scrollTrigger: { trigger: s, start: 'top bottom', end: 'top 50%', scrub: true } }));
     $$('.big-date').forEach((d) => gsap.from(d.children, { yPercent: 40, opacity: 0, duration: 1.4, ease: 'expo.out', stagger: .15, scrollTrigger: { trigger: d, start: 'top 85%', once: true } }));
