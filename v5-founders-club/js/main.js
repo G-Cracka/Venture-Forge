@@ -15,7 +15,7 @@
   const links = VF.nav.filter(([h]) => h !== 'index.html').map(([h, l]) => `<a href="${h}"${h === page ? ' aria-current="page"' : ''}>${l}</a>`).join('');
   document.body.insertAdjacentHTML('afterbegin', `
     <header class="nav"><div class="wrap bar">
-      <a class="logo" href="index.html" aria-label="Venture Forge Austin — home"><img src="${IMG}logos/vf-logo-white.png" alt="Venture Forge Austin"></a>
+      <a class="logo" href="index.html" aria-label="Venture Forge Austin — home"><img src="${IMG}logos/vf-logo.png" alt="Venture Forge Austin"></a>
       <nav class="links" aria-label="Primary">${links}</nav>
       <div class="cta"><a class="btn ghost" href="partner.html">Partner</a><a class="btn" href="${VF.links.register}" target="_blank" rel="noopener">Register</a></div>
       <button class="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
@@ -26,7 +26,7 @@
   document.body.insertAdjacentHTML('beforeend', `
     <footer class="foot"><div class="wrap">
       <div class="cols">
-        <div class="brand"><img src="${IMG}logos/vf-logo-white.png" alt="Venture Forge Austin"><p>Investing in innovation. Forging eternal impact. An invitation-only summit convening investors, founders, and philanthropists in Austin, Texas.</p></div>
+        <div class="brand"><img src="${IMG}logos/vf-logo.png" alt="Venture Forge Austin"><p>Investing in innovation. Forging eternal impact. An invitation-only summit convening investors, founders, and philanthropists in Austin, Texas.</p></div>
         <div><h5>Explore</h5><ul><li><a href="2026-event.html">2026 Event</a></li><li><a href="speakers.html">Speakers</a></li><li><a href="vision.html">Vision</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
         <div><h5>Engage</h5><ul><li><a href="partner.html">Partner</a></li><li><a href="${VF.links.register}" target="_blank" rel="noopener">Register</a></li><li><a href="${VF.links.chat}" target="_blank" rel="noopener">Event Chat</a></li></ul></div>
         <div><h5>Gathering</h5><ul><li>Riverbend Centre</li><li>Austin, Texas</li><li>September 23–24, 2026</li></ul></div>
@@ -128,7 +128,7 @@
 
     // Hero
     $$('.hero h1').forEach((h) => {
-      h.innerHTML = h.innerHTML.split('<br>').map((l) => `<span style="display:block;overflow:hidden;padding-bottom:.06em"><span style="display:inline-block">${l}</span></span>`).join('');
+      h.innerHTML = h.innerHTML.split('<br>').map((l) => `<span style="display:block;overflow:hidden;padding-bottom:.22em;margin-bottom:-.16em"><span style="display:inline-block">${l}</span></span>`).join('');
       gsap.from($$('span > span', h), { yPercent: 110, duration: 1.5, ease: 'expo.out', stagger: .12, delay: .2 });
     });
     gsap.from('.hero .kicker, .hero .side > *', { opacity: 0, y: 24, duration: 1.2, ease: 'expo.out', stagger: .1, delay: .6 });
@@ -164,7 +164,7 @@
 
     // Counters
     $$('[data-count]').forEach((el) => { const end = +el.dataset.count, o = { v: 0 }; gsap.to(o, { v: end, duration: 2.2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, onUpdate: () => { el.textContent = (el.dataset.pre || '') + Math.round(o.v) + (el.dataset.suffix || ''); } }); });
-    $$('.seal').forEach((s) => gsap.from(s, { scale: 2.2, opacity: 0, rotate: -40, duration: 1.1, ease: 'back.out(1.6)', scrollTrigger: { trigger: s, start: 'top 90%', once: true } }));
+    $$('.seal-logo').forEach((s) => gsap.from(s, { opacity: 0, y: 30, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: s, start: 'top 92%', once: true } }));
 
     // Flat-lay: items slide in from beyond the edges and settle at their angle
     $$('.flatlay').forEach((f) => {

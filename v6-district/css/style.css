@@ -67,6 +67,7 @@ h1, h2, h3, h4, p { margin: 0; font-weight: 400; }
     repeating-radial-gradient(ellipse 60% 45% at 20% 25%, transparent 0 22px, oklch(0.18 0 0 / .05) 23px 24px),
     repeating-radial-gradient(ellipse 55% 60% at 80% 80%, transparent 0 26px, oklch(0.18 0 0 / .045) 27px 28px); }
 .tear-b, .tear-t { position: relative; }
+.tear-b::after, .tear-t::before { display: none !important; }
 .tear-b::after, .tear-t::before { content: ''; position: absolute; left: 0; right: 0; height: 34px; z-index: 3; pointer-events: none; background: var(--tear, var(--bg));
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 34' preserveAspectRatio='none'%3E%3Cpath d='M0 34V18l22-6 18 9 31-12 24 8 19-10 33 11 26-7 20 9 29-14 22 10 35-6 18 8 27-11 31 9 16-7 34 12 25-10 21 6 30-9 19 11 28-8 33 7 17-12 26 10 32-8 20 9 27-6 23 8 30-13 18 9 35-5 22 7 26-11 31 10 17-6 29 8 24-12 33 9 19-7 28 10 22-8 31 6 18-11 27 9 25-6 30 10 21-9 34 7 16-8 29 11 23-10 26 7 20-6V34Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 34' preserveAspectRatio='none'%3E%3Cpath d='M0 34V18l22-6 18 9 31-12 24 8 19-10 33 11 26-7 20 9 29-14 22 10 35-6 18 8 27-11 31 9 16-7 34 12 25-10 21 6 30-9 19 11 28-8 33 7 17-12 26 10 32-8 20 9 27-6 23 8 30-13 18 9 35-5 22 7 26-11 31 10 17-6 29 8 24-12 33 9 19-7 28 10 22-8 31 6 18-11 27 9 25-6 30 10 21-9 34 7 16-8 29 11 23-10 26 7 20-6V34Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat; }
@@ -76,10 +77,11 @@ h1, h2, h3, h4, p { margin: 0; font-weight: 400; }
 /* Halftone photo */
 .halftone { position: relative; overflow: hidden; }
 .halftone img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: grayscale(1) contrast(1.35) brightness(1.05); }
-.halftone::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(oklch(0.14 0 0 / .55) 32%, transparent 34%) 0 0 / 5px 5px; mix-blend-mode: multiply; }
+.halftone::after { content: none; }
 
 /* Stamp badge */
-.stamp { width: clamp(8rem, 12vw, 11rem); aspect-ratio: 1; }
+.stamp { width: clamp(10rem, 15vw, 14rem); }
+.stamp img { width: 100%; height: auto; display: block; }
 .stamp svg { width: 100%; height: 100%; overflow: visible; }
 .stamp .ring { animation: turn 30s linear infinite; transform-origin: 50% 50%; }
 @keyframes turn { to { transform: rotate(360deg); } }
@@ -130,6 +132,10 @@ h1, h2, h3, h4, p { margin: 0; font-weight: 400; }
 .goldband .btn.dark { background: var(--gold); color: var(--ink); border-color: var(--gold); }
 .goldband .btn.dark:hover { background: transparent; color: var(--gold); }
 .goldband .script { color: var(--gold); font-size: clamp(1.15rem, .8vw + 1rem, 1.6rem); margin-top: 1.5rem; display: block; }
+.goldband .script.white { color: var(--fg); }
+.script .gold { color: var(--gold); }
+.goldband .body-l { font-size: clamp(1.15rem, .7vw + 1rem, 1.5rem); line-height: 1.55; margin-top: 1.25rem; max-width: 46rem; color: var(--fg); }
+.goldband .body-l em { font-style: normal; color: var(--gold); }
 .goldband .stamp { color: var(--gold); margin-top: -1rem; }
 .goldband .stats { display: flex; gap: clamp(1.25rem, 4vw, 3.5rem); flex-wrap: wrap; margin-top: 2rem; }
 .goldband .stats b { display: block; font-family: var(--f-display); font-weight: 400; font-size: clamp(2.2rem, 2.5vw + 1rem, 3.4rem); line-height: 1; }

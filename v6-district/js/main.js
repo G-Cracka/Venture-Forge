@@ -26,12 +26,13 @@
       <g class="ring"><text font-size="7" font-weight="700" letter-spacing="2.2" fill="currentColor" font-family="Fira Sans, sans-serif"><textPath href="#${id}">${txt}${txt}</textPath></text></g>
       <g stroke="currentColor" stroke-width="2.4" stroke-linecap="round">${rays}</g><circle cx="50" cy="50" r="5.5" fill="currentColor"/></svg>`;
   };
-  $$('[data-stamp]').forEach((el) => { el.innerHTML = stamp(el.dataset.stamp || undefined); });
+  const vfLogo = () => `<img src="${VF.IMG}logos/vf-logo.png" alt="Venture Forge">`;
+  $$('[data-stamp]').forEach((el) => { el.innerHTML = vfLogo(); });
 
   /* ---------- Chrome ---------- */
   document.body.insertAdjacentHTML('afterbegin', `
     <header class="nav"><div class="wrap bar">
-      <a class="logo" href="index.html" aria-label="Venture Forge Austin — home"><img src="${IMG}logos/vf-logo-white.png" alt="Venture Forge Austin"></a>
+      <a class="logo" href="index.html" aria-label="Venture Forge Austin — home"><img src="${IMG}logos/vf-logo.png" alt="Venture Forge Austin"></a>
       <nav class="links" aria-label="Primary">${VF.nav.filter(([h]) => h !== 'index.html').map(([h, l]) => `<a href="${h}"${h === page ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav>
       <div class="icons">
         <a href="${MAPS}" target="_blank" rel="noopener">${I.pin}Location</a>
@@ -47,7 +48,7 @@
   document.body.insertAdjacentHTML('beforeend', `
     <footer class="foot topo"><div class="wrap">
       <div class="cols">
-        <div class="brand"><div class="stamp">${stamp()}</div><p>Investing in innovation. Forging eternal impact. Meeting September 23–24, 2026 at Riverbend Centre in Austin, Texas.</p>
+        <div class="brand"><div class="stamp">${vfLogo()}</div><p>Investing in innovation. Forging eternal impact. Meeting September 23–24, 2026 at Riverbend Centre in Austin, Texas.</p>
           <div class="row"><a class="btn" href="${VF.links.register}" target="_blank" rel="noopener">Register</a><a class="btn line" href="${MAPS}" target="_blank" rel="noopener">Get directions</a></div></div>
         <div><h5>Explore</h5><ul><li><a href="2026-event.html">2026 Event</a></li><li><a href="speakers.html">Speakers</a></li><li><a href="vision.html">Vision</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
         <div><h5>Engage</h5><ul><li><a href="partner.html">Partner</a></li><li><a href="${VF.links.register}" target="_blank" rel="noopener">Register</a></li><li><a href="${VF.links.chat}" target="_blank" rel="noopener">Event Chat</a></li></ul></div>
@@ -110,7 +111,7 @@
 
     // Hero: poster lines punch up with a slight skew
     gsap.from('.hero h1 .ln > span', { yPercent: 115, skewY: 6, duration: 1.3, ease: 'expo.out', stagger: .1, delay: .15 });
-    gsap.from('.hero .row, .hero .sub, .hero .scroll', { opacity: 0, y: 20, duration: 1, ease: 'expo.out', delay: .7, stagger: .1 });
+    gsap.from('.hero .row, .hero .sub', { opacity: 0, y: 20, duration: 1, ease: 'expo.out', delay: .7, stagger: .1 });
     $$('.hero > video, .hero > img').forEach((v) => gsap.fromTo(v, { scale: 1.15 }, { scale: 1, yPercent: 10, ease: 'none', scrollTrigger: { trigger: v.parentElement, start: 'top top', end: 'bottom top', scrub: true } }));
 
     // Section poster headings: words slam in
@@ -123,7 +124,6 @@
 
     // Gold band: cut-outs rise, stamp spins with scroll
     $$('.cutout').forEach((c, i) => gsap.fromTo(c, { yPercent: 35 + (i % 3) * 10 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: c.closest('section'), start: 'top 80%', end: 'bottom bottom', scrub: true } }));
-    $$('.goldband .stamp svg, .foot .stamp svg').forEach((s) => gsap.to(s, { rotate: 160, ease: 'none', scrollTrigger: { trigger: s, start: 'top bottom', end: 'bottom top', scrub: true } }));
 
     // Counters
     $$('[data-count]').forEach((el) => { const end = +el.dataset.count, o = { v: 0 }; gsap.to(o, { v: end, duration: 2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true }, onUpdate: () => { el.textContent = Math.round(o.v) + (el.dataset.suffix || ''); } }); });

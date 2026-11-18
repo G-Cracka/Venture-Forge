@@ -105,6 +105,7 @@ em { font-style: normal; color: var(--gold); }
 .lit .kicker { margin-bottom: 2.5rem; }
 .lit p.big { font-family: var(--f-display); font-size: clamp(2rem, 3.2vw + 1rem, 4.4rem); line-height: 1.12; max-width: 22ch; }
 .lit p.big + p.big { margin-top: 3rem; }
+.lit p.big.para { font-family: var(--f-body, inherit); font-size: clamp(1.15rem, .7vw + 1rem, 1.5rem); line-height: 1.6; max-width: 48rem; margin-top: 1.75rem; }
 .lit .ln { display: inline; opacity: .22; transition: opacity .5s; }
 .lit .ln.on { opacity: 1; }
 
@@ -116,15 +117,15 @@ em { font-style: normal; color: var(--gold); }
 /* ---------- Benefit photo cards ---------- */
 .benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .bcard { position: relative; aspect-ratio: 4/3.2; overflow: hidden; border-radius: 4px; background: var(--card); }
-.bcard img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease), filter .8s; filter: brightness(.7) saturate(.9); }
+.bcard img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 1.4s var(--ease), filter .8s; filter: brightness(.7) saturate(.9); }
 .bcard:hover img { transform: scale(1.06); filter: brightness(.85); }
 .bcard::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, oklch(0.12 0 0 / .85), transparent 55%); }
 .bcard .cap { position: absolute; left: 1.25rem; right: 1.25rem; bottom: 1.25rem; z-index: 1; display: flex; gap: .85rem; align-items: stretch; }
 .bcard .cap::before { content: ''; width: 2px; background: var(--gold); flex: none; }
 .bcard .cap h3 { font-size: clamp(1.25rem, .8vw + 1rem, 1.6rem); line-height: 1.15; }
 .bcard .cap p { font-size: .9rem; color: var(--muted); margin-top: .25rem; line-height: 1.4; }
-.bcard .logo { position: absolute; top: 1rem; left: 1rem; z-index: 1; background: var(--cream); padding: .45rem .7rem; border-radius: 3px; height: 2.6rem; display: grid; place-items: center; }
-.bcard .logo img { position: static; height: 100%; width: auto; max-width: 6rem; object-fit: contain; filter: none; transform: none !important; }
+.bcard .logo { position: absolute; top: 1rem; left: 1rem; z-index: 1; background: var(--cream); padding: .4rem .7rem; border-radius: 3px; width: 8rem; height: 2.8rem; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.bcard .logo img { position: static; inset: auto; width: 100%; height: 100%; object-fit: contain; filter: none; transform: none !important; }
 @media (max-width: 960px) { .benefits { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .benefits { grid-template-columns: 1fr; } }
 
@@ -148,6 +149,7 @@ em { font-style: normal; color: var(--gold); }
 .stats6 b { display: block; font-family: var(--f-display); font-weight: 400; font-size: clamp(3rem, 4vw + 1rem, 5rem); line-height: 1; color: var(--gold); }
 .stats6 span { display: block; margin-top: .6rem; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
 .seal { position: absolute; right: clamp(1rem, 6vw, 7rem); bottom: -1rem; width: clamp(7rem, 11vw, 10rem); aspect-ratio: 1; }
+.seal-logo { display: block; width: clamp(11rem, 16vw, 15rem); height: auto; margin: clamp(3rem, 6vw, 4.5rem) auto 0; }
 .seal svg { width: 100%; height: 100%; }
 .seal .txt { animation: spin 24s linear infinite; transform-origin: 50% 50%; }
 @keyframes spin { to { transform: rotate(360deg); } }
