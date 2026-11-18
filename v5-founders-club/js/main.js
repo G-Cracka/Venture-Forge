@@ -79,6 +79,8 @@
     $$('button', el).forEach((b) => b.addEventListener('click', () => { const o = b.parentElement.classList.toggle('open'); b.setAttribute('aria-expanded', o); setTimeout(() => window.ScrollTrigger?.refresh(), 650); }));
   });
   $$('[data-href]').forEach((a) => { a.href = VF.links[a.dataset.href]; });
+  // Tall portraits (Derek Welborn) show whole, centred over a blurred copy instead of cropping to the hat
+  $$('.bcard > img[src*="derek-welborn"]').forEach((img) => { const c = img.parentElement; c.classList.add('fit'); c.style.setProperty('--fit-bg', `url("${img.getAttribute('src')}")`); });
 
   /* Wax seal */
   $$('[data-seal]').forEach((el) => {

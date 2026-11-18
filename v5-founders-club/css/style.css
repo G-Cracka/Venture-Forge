@@ -119,6 +119,9 @@ em { font-style: normal; color: var(--gold); }
 .bcard { position: relative; aspect-ratio: 4/3.2; overflow: hidden; border-radius: 4px; background: var(--card); }
 .bcard img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 1.4s var(--ease), filter .8s; filter: brightness(.7) saturate(.9); }
 .bcard:hover img { transform: scale(1.06); filter: brightness(.85); }
+.bcard > img[src*="noble-origins"] { scale: 1.14; transform-origin: 50% 25%; }
+.bcard.fit::before { content: ''; position: absolute; inset: -30px; background: var(--fit-bg) center / cover; filter: blur(22px) brightness(.45); }
+.bcard.fit > img { object-fit: contain; object-position: center 15%; height: 88%; top: 2%; }
 .bcard::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, oklch(0.12 0 0 / .85), transparent 55%); }
 .bcard .cap { position: absolute; left: 1.25rem; right: 1.25rem; bottom: 1.25rem; z-index: 1; display: flex; gap: .85rem; align-items: stretch; }
 .bcard .cap::before { content: ''; width: 2px; background: var(--gold); flex: none; }
