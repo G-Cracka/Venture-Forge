@@ -40,7 +40,7 @@
       ['photos/summit.jpg', 'Opening Night Reception', 'Wednesday, September 23'],
       ['speakers/noble-origins.jpg', 'Founders Showcase', 'Five Kingdom-minded companies'],
       ['speakers/jake-thomsen.jpg', 'Investors Panel', 'Kingdom Due Diligence'],
-      ['speakers/derek-welborn.jpg', 'Founders Panel', 'What Christian Founders Wish Investors Understood'],
+      ['speakers/joel-trammell.jpg', 'Founders Panel', 'What Christian Founders Wish Investors Understood'],
       ['photos/hero-austin.jpg', 'Networking', 'Curated introductions across sectors'],
       ['photos/forge.jpg', 'Keynotes', 'Faith journey and taking on challenges'],
     ]
@@ -48,8 +48,10 @@
   $$('[data-render="benefits"]').forEach((el) => {
     el.innerHTML = BENEFITS[el.dataset.set || 'home'].map(([src, t, s]) => `<article class="bcard" data-up><img src="${IMG}${src}" alt="" loading="lazy"><div class="cap"><div><h3>${esc(t)}</h3><p>${esc(s)}</p></div></div></article>`).join('');
   });
+  // Tall portrait doesn't fit the wide cards; Saints Western's card uses the forge photo instead
+  const cardImg = (c) => (c.img.includes('derek-welborn') ? IMG + 'photos/forge.jpg' : c.img);
   $$('[data-render="showcase"]').forEach((el) => {
-    el.innerHTML = VF.showcase.map((c) => `<a class="bcard" href="${c.url}" target="_blank" rel="noopener" data-up><img src="${c.img}" alt="" loading="lazy"><span class="logo"><img src="${c.logo}" alt=""></span><div class="cap"><div><h3>${esc(c.name)}</h3><p>${esc(c.people)}</p></div></div></a>`).join('');
+    el.innerHTML = VF.showcase.map((c) => ({ ...c, img: cardImg(c) })).map((c) => `<a class="bcard" href="${c.url}" target="_blank" rel="noopener" data-up><img src="${c.img}" alt="" loading="lazy"><span class="logo"><img src="${c.logo}" alt=""></span><div class="cap"><div><h3>${esc(c.name)}</h3><p>${esc(c.people)}</p></div></div></a>`).join('');
   });
   const voice = (s) => `
     <article class="voice" data-up>
@@ -79,8 +81,6 @@
     $$('button', el).forEach((b) => b.addEventListener('click', () => { const o = b.parentElement.classList.toggle('open'); b.setAttribute('aria-expanded', o); setTimeout(() => window.ScrollTrigger?.refresh(), 650); }));
   });
   $$('[data-href]').forEach((a) => { a.href = VF.links[a.dataset.href]; });
-  // Tall portraits (Derek Welborn) show whole, centred over a blurred copy instead of cropping to the hat
-  $$('.bcard > img[src*="derek-welborn"]').forEach((img) => { const c = img.parentElement; c.classList.add('fit'); c.style.setProperty('--fit-bg', `url("${img.getAttribute('src')}")`); });
 
   /* Wax seal */
   $$('[data-seal]').forEach((el) => {
